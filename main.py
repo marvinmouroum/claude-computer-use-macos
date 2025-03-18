@@ -9,11 +9,14 @@ from computer_use_demo.tools import ToolResult
 from anthropic.types.beta import BetaMessage, BetaMessageParam
 from anthropic import APIResponse
 
+import dotenv
+dotenv.load_dotenv()
+
 
 async def main():
     # Set up your Anthropic API key and model
-    api_key = os.getenv("ANTHROPIC_API_KEY", "YOUR_API_KEY_HERE")
-    if api_key == "YOUR_API_KEY_HERE":
+    api_key = os.getenv("ANTHROPIC_API_KEY", "ANTHROPIC_API_KEY")
+    if api_key == "ANTHROPIC_API_KEY":
         raise ValueError(
             "Please first set your API key in the ANTHROPIC_API_KEY environment variable"
         )
@@ -23,7 +26,7 @@ async def main():
     if len(sys.argv) > 1:
         instruction = " ".join(sys.argv[1:])
     else:
-        instruction = "Save an image of a cat to the desktop."
+        instruction = "Open Postman and create a GET request to https://jsonplaceholder.typicode.com/posts"
 
     print(
         f"Starting Claude 'Computer Use'.\nPress ctrl+c to stop.\nInstructions provided: '{instruction}'"
